@@ -1,4 +1,4 @@
-package me.lucasxaviervieira.notemanager.note_manager_api.config;
+package me.lucasxaviervieira.notemanager.note_manager_api.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
