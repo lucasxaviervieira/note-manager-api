@@ -18,8 +18,26 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<String> registerUser(@RequestParam String username, @RequestParam String password) {
-        userService.registerUser(username, password);
-        return ResponseEntity.ok("User registered successfully!");
+
+        String result = userService.registerUser(username, password);
+
+        if (result.equals("success")) {
+            return ResponseEntity.ok("User registered successfully");
+        }
+        return ResponseEntity.badRequest().body("Username already taken");
+
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<String> loginUser(@RequestParam String username, @RequestParam String password) {
+
+        String result = userService.loginUser(username, password);
+
+        if (!result.equals("invalid_credentials")) {
+            return ResponseEntity.ok("Bearer " + result);
+        }
+
+        return ResponseEntity.status(401).body("Invalid Credentials");
     }
 
 }
